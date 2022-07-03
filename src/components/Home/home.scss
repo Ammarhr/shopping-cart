@@ -14,11 +14,12 @@ body {
 
 .container {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .cards-container {
     display: flex;
+    // flex-direction: column;
     border-radius: 6px;
     color: rgb(255, 255, 255);
     background: rgb(182, 182, 182);
@@ -32,10 +33,11 @@ body {
 }
 
 .card {
-    flex: 0.5 0 250px;
+    flex: 0.01 0 250px;
     box-shadow: 0 1px 1rem -4px #000;
     margin: 0.5rem 0.2rem 1.1rem 0.2rem;
-    overflow: hidden;
+    // overflow: hidden;
+    width: 19%;
     border-radius: 6px;
     background-color: #333333e3 !important;
     cursor: pointer;
@@ -45,6 +47,7 @@ body {
         width: 250px;
         height: 250px;
         object-fit: center;
+        margin: 0 auto;
     }
     &:hover {
         box-shadow: 0 4px 1rem -4px #000;

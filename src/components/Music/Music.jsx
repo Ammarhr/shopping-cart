@@ -5,20 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Music (props) {
 
-	const audio = new Audio(props.songUrl);
-
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-	const handlePlay = () => audio.play();
-	const handleStop = () => audio.pause();
 
 	return (
-		<div>
+		<>
 			<Button style={{ backgroundColor: 'transparent', color: 'white' }} onClick={handleShow}>
 				More Info
-				{console.log('from music', props)}
 			</Button>
 			<Modal show={show} style={{ maxWidth: "30erm", color: "black" }} onHide={handleClose}>
 				<Modal.Header closeButton>
@@ -40,7 +35,7 @@ function Music (props) {
 					In stock:	{props.quantity}
 				</Modal.Footer>
 			</Modal>
-		</div>
+		</>
 	)
 }
 
