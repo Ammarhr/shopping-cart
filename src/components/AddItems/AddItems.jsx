@@ -1,17 +1,17 @@
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+
 import { Modal, Button, Form, Alert, Row, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from 'react-cookies';
-import './add_items.scss'
+import './AddItems.scss'
 
 function Add_Items (props) {
 	const [validated, setValidated] = useState(false);
 	const [product, setProduct] = useState({})
-
-	const handleChange = (e) => {
-		// console.log('state change====>',product);
-		setProduct({ ...product, [e.target.name]: e.target.value })
-	}
+	const navigate = useNavigate();
+	
+	const handleChange = (e) =>	setProduct({ ...product, [e.target.name]: e.target.value })
 	const handleSubmit = (event) => {
 
 		const form = event.currentTarget;
@@ -40,12 +40,15 @@ function Add_Items (props) {
 
 		}).then(response => {
 			console.log('this is response', response);
+			navigate('/');
+
 		}).catch((error) => {
 			console.error(error, "hellllllllllooo");
 		});
 	};
 
 	return (
+
 		<Form noValidate validated={validated} onSubmit={handleSubmit}>
 			<Row className="mb-3">
 				<Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -97,20 +100,20 @@ function Add_Items (props) {
 				</Form.Group>
 				<Form.Group as={Col} md="3" controlId="validationCustom04">
 					<Form.Label>Quantity</Form.Label>
-					<Form.Control type="number" placeholder="Quantity" name="quantity" required  onChange={handleChange}/>
+					<Form.Control type="number" placeholder="Quantity" name="quantity" required onChange={handleChange} />
 					<Form.Control.Feedback type="invalid">
 						Please provide a valid state.
 					</Form.Control.Feedback>
 				</Form.Group>
 				<Form.Group as={Col} md="3" controlId="validationCustom05">
 					<Form.Label>Product Title</Form.Label>
-					<Form.Control type="text" placeholder="Title" name="title" required  onChange={handleChange}/>
+					<Form.Control type="text" placeholder="Title" name="title" required onChange={handleChange} />
 					<Form.Control.Feedback type="invalid">
 						Please provide a valid Title.
 					</Form.Control.Feedback>
 				</Form.Group>
 			</Row>
-			<Button className="trans" type="submit">Submit form</Button>
+			<Button className="trans" type="submit" >Submit form</Button>
 		</Form>
 	);
 }
