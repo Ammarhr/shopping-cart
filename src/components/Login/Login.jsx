@@ -5,14 +5,12 @@ import Cookies from 'react-cookies';
 
 function Login (props) {
 	const [show, setShow] = useState(false);
-	const [user_password, setUser_password] = useState('');
-	const [user_name, setUser_name] = useState('');
+	const [user, setUser] = useState({})
 	const [alertShow, setAlertShow] = useState(false);
-	
+
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-	const handleChangePassword = (e) => setUser_password(e.target.value)
-	const handleChangeUserName = (e) => setUser_name(e.target.value)
+	const handleChange = (e) => { setUser({ ...user, [e.target.name]: e.target.value }) }
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -21,7 +19,7 @@ function Login (props) {
 			cache: 'no-cache',
 			credentials: 'same-origin',
 			headers: {
-				authorization: `Basic ${btoa(`${user_name}:${user_password}`)}`
+				authorization: `Basic ${btoa(`${user.user_name}:${user.user_password}`)}`
 			},
 			referrerPolicy: 'no-referrer',
 		}
@@ -60,14 +58,14 @@ function Login (props) {
 					<Modal.Title>SignIn</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form onSubmit={(e) => handleSubmit(e) }>
+					<Form onSubmit={(e) => handleSubmit(e)}>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>User Name</Form.Label>
-							<Form.Control type="user" placeholder="User Name" onChange={(e) => handleChangeUserName(e)} />
+							<Form.Control type="user" placeholder="User Name" name="user_name" onChange={handleChange} />
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" onChange={(e) => handleChangePassword(e)} />
+							<Form.Control type="password" placeholder="Password" name="user_password" onChange={handleChange} />
 						</Form.Group>
 						<Button className="trans" variant="primary" type="submit">
 							Submit
