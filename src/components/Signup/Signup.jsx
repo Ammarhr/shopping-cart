@@ -32,7 +32,7 @@ function Signup (props) {
 			handleClose();
 			console.log('this is response', response);
 			Cookies.save('remember_user', response.data)
-			props.changeLogged(true)
+			props.changelogged(true)
 		}).catch((error) => {
 			setAlertShow(true)
 			console.error(error, "hellllllllllooo");

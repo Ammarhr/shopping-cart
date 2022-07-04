@@ -25,10 +25,10 @@ function Login (props) {
 		}
 
 		axios.post('http://localhost:3333/signin', {}, options).then(response => {
-			// console.log(response, 'response');
-			handleClose();
+
+		handleClose();
 			Cookies.save('remember_user', response.data)
-			props.changeLogged(true)
+			props.changelogged(true)
 		}).catch((error) => {
 			setAlertShow(true)
 			console.error(error, "server side error ");
@@ -61,11 +61,11 @@ function Login (props) {
 					<Form onSubmit={(e) => handleSubmit(e)}>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>User Name</Form.Label>
-							<Form.Control type="user" placeholder="User Name" name="user_name" onChange={handleChange} />
+							<Form.Control type="user" placeholder="User Name" name="user_name" onChange={handleChange} required/>
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" name="user_password" onChange={handleChange} />
+							<Form.Control type="password" placeholder="Password" name="user_password" onChange={handleChange} required />
 						</Form.Group>
 						<Button className="trans" variant="primary" type="submit">
 							Submit

@@ -13,7 +13,6 @@ function App () {
 					<Routes>
 						<Route exact path='/' element={<Home />}></Route>
 						<Route exact path='/add' element={<AddItems />}></Route>
-					{/* <Search /> */}
 					</Routes>
 				</Router>
 			</Suspense>
