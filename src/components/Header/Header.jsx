@@ -29,12 +29,13 @@ function Header (props) {
 	const handleLogOut = () => {
 
 		Cookies.remove('remember_user');
-
 		setIsLogged(false)
+		changelogged(false)
 	}
 
-	const changeLogged = (logged) => {
+	const changelogged = (logged) => {
 		setIsLogged(logged)
+		props.checkLogged(logged)
 	}
 
 	useEffect(() => {
@@ -42,21 +43,20 @@ function Header (props) {
 	}, [isLogged], handleLogOut);
 
 	return (
-			<Navbar bg="dark" variant="dark">
-				{/* {console.log(jwt_decode(Cookies.get('remember token')))} */}
-				<Container>
-					<Navbar.Brand href="#home">	
+		<Navbar bg="dark" variant="dark">
+			<Container>
+				<Navbar.Brand>
 					<ul>
 						<li><Link to="/">Home</Link></li>
-						<li><Link to="/add">Add Items</Link></li>
-						</ul>
-					</Navbar.Brand>
-					<Navbar.Brand >
-						{isLogged ? user_name : <Login changeLogged={changeLogged} />}
-						{isLogged ? <Button className={"signout"} onClick={handleLogOut}>LogOut</Button> : <Signup changeLogged={changeLogged} />}
-					</Navbar.Brand>
-				</Container>
-			</Navbar>
+						{isLogged ? <li><Link to="/add">Add Items</Link></li>:''}
+					</ul>
+				</Navbar.Brand>
+				<Navbar.Brand >
+					{isLogged ? user_name : <Login changelogged={changelogged} />}
+					{isLogged ? <Button className={"signout"} onClick={handleLogOut}>LogOut</Button> : <Signup changeLogged={changelogged} />}
+				</Navbar.Brand>
+			</Container>
+		</Navbar>
 	)
 }
 

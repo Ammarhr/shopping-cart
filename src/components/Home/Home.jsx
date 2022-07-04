@@ -1,42 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { Card } from 'react-bootstrap';
-import { TrashFill } from 'react-bootstrap-icons';
+import React, { useState, useEffect, Suspense } from 'react';
 import Spinner from '../Spinner/Spinner';
 import axios from 'axios';
 import Cookies from 'react-cookies';
 import './home.scss';
-
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 
-const Music = React.lazy(() => import('../Music/Music'));
+const Cards = React.lazy(() => import('./Cards'));
+
 
 function Home () {
 
-	const [songs, setSong] = useState('');
+	const [shops, setshop] = useState('');
+	const [isLogged, setIsLogged] = useState(false);
 
-	let keyCounter = 0;
-	const handleGetsongs = () => {
-		console.log('redo');
+	const handleGetshops = () => {
+
 		var options = {
 			method: 'GET',
 			url: 'http://localhost:3333/product',
-			// params: { locale: 'en-US' },
-			// headers: {
-			// 	'x-rapidapi-host': 'shazam.p.rapidapi.com',
-			// 	'x-rapidapi-key': API_KRY,
-			// }
 		};
 		axios.request(options).then((response) => {
-			setSong(response.data)
-			console.log(response.data)
+			setshop(response.data)
+			if (Cookies.load("remember_user")) {
+				setIsLogged(true);
+			} else {
+				setIsLogged(false);
+			}
 
 		}).catch((error) => {
 			console.error(error);
 		});
 	}
 	const handleDelete = (_id) => {
-		console.log('this is product _id', _id);
 		axios.delete(`http://localhost:3333/product/${_id}`, {
 
 			"headers": {
@@ -45,50 +41,78 @@ function Home () {
 			},
 
 		}).then(response => {
-			handleGetsongs();
+			handleGetshops();
 			console.log('this is response', response);
 		}).catch((error) => {
 			console.error(error, "error message");
 		});
 	}
+	const checkLogged = (logged) => setIsLogged(logged);
+
 	useEffect(() => {
-		handleGetsongs();
+		handleGetshops();
 	}, []);
 
-	return (<>
-		<Header />
-		<div className="cards-container">
+	return (
+		<>
+			<Suspense fallback={<Spinner />}>
+				<Header checkLogged={checkLogged} />
+				<h2 style={{ color: 'white' }}>Electronics:</h2>
 
-			{/* {songs ? '' : handleGetsongs()} */}
-			{songs ? songs.map(data => {
+				<div className="cards-container">
+					{shops ? shops.filter((result) => result.category_id === 1).map(data => {
 
-				let song = {
-					category_id: data.category_id,
-					id: data.id,
-					img_url: data.img_url,
-					over_view: data.over_view,
-					price: data.price,
-					quantity: data.quantity,
-					title: data.title
-				};
-				return (
-					<Card className="card" key={keyCounter++}>
-						<Card.Img alt={data.title} variant="top" src={data.img_url ? data.img_url : 'https://assets.considerable.com/wp-content/uploads/2018/07/12115639/music_hero_con.jpg'} />
-						<Card.Body>
-							<Card.Text>
-								{data.title} <TrashFill style={{ color: 'red' }} onClick={() => handleDelete(data.id)} />
-							</Card.Text>
-						</Card.Body>
-						<div style={{ textAlign: 'center', margin: '5%' }}>
-							<Music key={'a' + keyCounter++} {...song} />
+						let shop = {
+							category_id: data.category_id,
+							id: data.id,
+							img_url: data.img_url,
+							over_view: data.over_view,
+							price: data.price,
+							quantity: data.quantity,
+							title: data.title
+						};
+						return (
+							<Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
+						)
+					}) : <Spinner />}
+				</div>
+				<h2 style={{ color: 'white' }}>Clothes:</h2>
+				<div className="cards-container">
+					{shops ? shops.filter((result) => result.category_id === 3).map(data => {
 
-						</div>
-					</Card>
-				)
-			}) : <Spinner />}
-		</div>
-		<Footer />
-	</>
+						let shop = {
+							category_id: data.category_id,
+							id: data.id,
+							img_url: data.img_url,
+							over_view: data.over_view,
+							price: data.price,
+							quantity: data.quantity,
+							title: data.title
+						};
+						return <Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
+					}) : <Spinner />}
+				</div>
+
+				<h2 style={{ color: 'white' }}>Books:</h2>
+				<div className="cards-container">
+
+					{shops ? shops.filter((result) => result.category_id === 5).map(data => {
+
+						let shop = {
+							category_id: data.category_id,
+							id: data.id,
+							img_url: data.img_url,
+							over_view: data.over_view,
+							price: data.price,
+							quantity: data.quantity,
+							title: data.title
+						};
+						return <Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
+					}) : <Spinner />}
+				</div>
+			</Suspense>
+			<Footer />
+		</>
 	)
 }
 
