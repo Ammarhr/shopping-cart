@@ -1,13 +1,16 @@
-function Footer (props) {
+import { Github, Linkedin } from 'react-bootstrap-icons';
+import './footer.scss'
+
+function Footer () {
 	return (
-		<div style={{display:'block', width:'100%', position:'absolute'}}>
-			<nav>
-				{/* <ul>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul> */}
-			</nav>
+		<div className="footer-basic">
+			<footer>
+				<div className="social">
+					<a href="https://github.com/Ammarhr"><Github /></a>
+					<a href="https://www.linkedin.com/in/ammar-al-hariry/"><Linkedin /></a>
+					<p className="copyright">Ammarhr © 2022</p>
+				</div>
+			</footer>
 		</div>
 	)
 }

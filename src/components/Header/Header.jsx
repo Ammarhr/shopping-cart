@@ -1,7 +1,5 @@
 import { Navbar, Container, Button } from 'react-bootstrap';
-import {
-	Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Cookies from 'react-cookies';
 import jwt_decode from 'jwt-decode';
@@ -35,7 +33,7 @@ function Header (props) {
 
 	const changelogged = (logged) => {
 		setIsLogged(logged)
-		props.checkLogged(logged)
+		props.checklogged(logged)
 	}
 
 	useEffect(() => {
@@ -48,12 +46,12 @@ function Header (props) {
 				<Navbar.Brand>
 					<ul>
 						<li><Link to="/">Home</Link></li>
-						{isLogged ? <li><Link to="/add">Add Items</Link></li>:''}
+						{isLogged ? <li><Link to="/add">Add Items</Link></li> : ''}
 					</ul>
 				</Navbar.Brand>
 				<Navbar.Brand >
 					{isLogged ? user_name : <Login changelogged={changelogged} />}
-					{isLogged ? <Button className={"signout"} onClick={handleLogOut}>LogOut</Button> : <Signup changeLogged={changelogged} />}
+					{isLogged ? <Button className={"signout"} onClick={handleLogOut} style={{ marginLeft: '4%' }}>LogOut</Button> : <Signup changeLogged={changelogged} />}
 				</Navbar.Brand>
 			</Container>
 		</Navbar>
