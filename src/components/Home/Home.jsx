@@ -56,7 +56,7 @@ function Home () {
 	return (
 		<>
 			<Suspense fallback={<Spinner />}>
-				<Header checkLogged={checkLogged} />
+				<Header changelogged={checkLogged} />
 				<h2 style={{ color: 'white' }}>Electronics:</h2>
 
 				<div className="cards-container">
@@ -78,7 +78,7 @@ function Home () {
 				</div>
 				<h2 style={{ color: 'white' }}>Clothes:</h2>
 				<div className="cards-container">
-					{shops ? shops.filter((result) => result.category_id === 3).map(data => {
+					{shops ? shops.filter((result) => result.category_id === 2).map(data => {
 
 						let shop = {
 							category_id: data.category_id,
@@ -96,7 +96,7 @@ function Home () {
 				<h2 style={{ color: 'white' }}>Books:</h2>
 				<div className="cards-container">
 
-					{shops ? shops.filter((result) => result.category_id === 5).map(data => {
+					{shops ? shops.filter((result) => result.category_id === 3).map(data => {
 
 						let shop = {
 							category_id: data.category_id,

@@ -50,7 +50,7 @@ function Login (props) {
 
 	return (
 		<>
-			<Button className="trans" onClick={handleShow}>
+			<Button className="trans" onClick={handleShow} style={{marginRight:'5.5%'}}>
 				SignIn
 			</Button>
 			<Modal show={show} onHide={handleClose}>
