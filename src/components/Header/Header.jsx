@@ -51,7 +51,7 @@ function Header (props) {
 				</Navbar.Brand>
 				<Navbar.Brand >
 					{isLogged ? user_name : <Login changelogged={changelogged} />}
-					{isLogged ? <Button className={"signout"} onClick={handleLogOut} style={{ marginLeft: '4%' }}>LogOut</Button> : <Signup changeLogged={changelogged} />}
+					{isLogged ? <Button className={"signout"} onClick={handleLogOut} style={{ marginLeft: '4%' }}>LogOut</Button> : <Signup changelogged={changelogged} />}
 				</Navbar.Brand>
 			</Container>
 		</Navbar>
