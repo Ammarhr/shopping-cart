@@ -56,60 +56,70 @@ function Home () {
 	return (
 		<>
 			<Suspense fallback={<Spinner />}>
-				<Header changelogged={checkLogged} />
-				<h2 style={{ color: 'white' }}>Electronics:</h2>
+				<Header checklogged={checkLogged} />
+				{shops && shops.filter((result) => result.category_id === 1).length > 0 ? (
+					<div>
+						<h2 style={{ color: 'white' }}>Electronics:</h2>
 
-				<div className="cards-container">
-					{shops ? shops.filter((result) => result.category_id === 1).map(data => {
+						<div className="cards-container">
+							{shops ? shops.filter((result) => result.category_id === 1).map(data => {
 
-						let shop = {
-							category_id: data.category_id,
-							id: data.id,
-							img_url: data.img_url,
-							over_view: data.over_view,
-							price: data.price,
-							quantity: data.quantity,
-							title: data.title
-						};
-						return (
-							<Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
-						)
-					}) : <Spinner />}
+								let shop = {
+									category_id: data.category_id,
+									id: data.id,
+									img_url: data.img_url,
+									over_view: data.over_view,
+									price: data.price,
+									quantity: data.quantity,
+									title: data.title
+								};
+								return (
+									<Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
+								)
+							}) : <Spinner />}
+						</div>
+					</div>
+				) : <div></div>}
+				{shops && shops.filter((result) => result.category_id === 2).length > 0 ? (
+					<div>
+						<h2 style={{ color: 'white' }}>Clothes:</h2>
+						<div className="cards-container">
+							{shops ? shops.filter((result) => result.category_id === 2).map(data => {
+
+								let shop = {
+									category_id: data.category_id,
+									id: data.id,
+									img_url: data.img_url,
+									over_view: data.over_view,
+									price: data.price,
+									quantity: data.quantity,
+									title: data.title
+								};
+								return <Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
+							}) : <Spinner />}
+						</div>
+					</div>
+				) : <div></div>}
+				{shops && shops.filter((result) => result.category_id === 2).length > 0 ? (<div>
+					<h2 style={{ color: 'white' }}>Books:</h2>
+					<div className="cards-container">
+
+						{shops ? shops.filter((result) => result.category_id === 3).map(data => {
+
+							let shop = {
+								category_id: data.category_id,
+								id: data.id,
+								img_url: data.img_url,
+								over_view: data.over_view,
+								price: data.price,
+								quantity: data.quantity,
+								title: data.title
+							};
+							return <Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
+						}) : <Spinner />}
+					</div>
 				</div>
-				<h2 style={{ color: 'white' }}>Clothes:</h2>
-				<div className="cards-container">
-					{shops ? shops.filter((result) => result.category_id === 2).map(data => {
-
-						let shop = {
-							category_id: data.category_id,
-							id: data.id,
-							img_url: data.img_url,
-							over_view: data.over_view,
-							price: data.price,
-							quantity: data.quantity,
-							title: data.title
-						};
-						return <Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
-					}) : <Spinner />}
-				</div>
-
-				<h2 style={{ color: 'white' }}>Books:</h2>
-				<div className="cards-container">
-
-					{shops ? shops.filter((result) => result.category_id === 3).map(data => {
-
-						let shop = {
-							category_id: data.category_id,
-							id: data.id,
-							img_url: data.img_url,
-							over_view: data.over_view,
-							price: data.price,
-							quantity: data.quantity,
-							title: data.title
-						};
-						return <Cards shop={shop} handleDelete={handleDelete} isLogged={isLogged} key={data.id} />
-					}) : <Spinner />}
-				</div>
+				) : <div></div>}
 			</Suspense>
 			<Footer />
 		</>
