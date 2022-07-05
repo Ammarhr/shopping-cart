@@ -1,13 +1,11 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
+import './home.scss';
 import Spinner from '../Spinner/Spinner';
 import axios from 'axios';
 import Cookies from 'react-cookies';
-import './home.scss';
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-
-const Cards = React.lazy(() => import('./Cards'));
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Cards from './Cards';
 
 function Home () {
 
@@ -55,7 +53,6 @@ function Home () {
 
 	return (
 		<>
-			<Suspense fallback={<Spinner />}>
 				<Header checklogged={checkLogged} />
 				{shops && shops.filter((result) => result.category_id === 1).length > 0 ? (
 					<div>
@@ -120,7 +117,6 @@ function Home () {
 					</div>
 				</div>
 				) : <div></div>}
-			</Suspense>
 			<Footer />
 		</>
 	)

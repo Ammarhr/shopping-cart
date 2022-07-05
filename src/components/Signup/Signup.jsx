@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import Cookies from 'react-cookies';
 
@@ -30,12 +31,15 @@ function Signup (props) {
 
 		}).then(response => {
 			handleClose();
-			console.log('this is response', response);
 			Cookies.save('remember_user', response.data)
 			props.changelogged(true)
+
+			let userName = jwt_decode(response.data).user_name;
+			props.getUserFromSignUp(userName)
+
 		}).catch((error) => {
 			setAlertShow(true)
-			console.error(error, "hellllllllllooo");
+			console.error(error, "sign Up Error");
 		});
 	};
 

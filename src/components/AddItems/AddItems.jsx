@@ -86,14 +86,14 @@ function Add_Items (props) {
 				<Row className="mb-3">
 					<Form.Group as={Col} md="6" >
 						<Form.Label>Price</Form.Label>
-						<Form.Control type="text" placeholder="price in JD" name="price" required onChange={handleChange} />
+						<Form.Control type="number" min="1" step=".01"  placeholder="price in JD" name="price" required onChange={handleChange} />
 						<Form.Control.Feedback type="invalid">
 							Please provide a valid price.
 						</Form.Control.Feedback>
 					</Form.Group>
 					<Form.Group as={Col} md="3">
 						<Form.Label>Quantity</Form.Label>
-						<Form.Control type="number" placeholder="Quantity" name="quantity" required onChange={handleChange} />
+						<Form.Control type="number"  min="1" placeholder="Quantity" name="quantity" required onChange={handleChange} />
 						<Form.Control.Feedback type="invalid">
 							Please provide a valid state.
 						</Form.Control.Feedback>

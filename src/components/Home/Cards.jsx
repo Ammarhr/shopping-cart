@@ -3,9 +3,7 @@ import { TrashFill } from 'react-bootstrap-icons';
 import Details from '../Details/Details';
 import './home.scss'
 
-
 function Cards (props) {
-
 
 	let keyCounter = 0;
 

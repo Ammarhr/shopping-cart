@@ -15,7 +15,7 @@ function App () {
 						<Route exact path='/add' element={<AddItems />}></Route>
 					</Routes>
 				</Router>
-			</Suspense>
+			 </Suspense>
 	);
 }
 

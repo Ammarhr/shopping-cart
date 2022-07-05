@@ -35,6 +35,10 @@ function Header (props) {
 		setIsLogged(logged)
 		props.checklogged(logged)
 	}
+	const getUserFromSignUp = (user) => {
+
+		setUser_name(user)
+	}
 
 	useEffect(() => {
 		getUser();
@@ -51,7 +55,12 @@ function Header (props) {
 				</Navbar.Brand>
 				<Navbar.Brand >
 					{isLogged ? user_name : <Login changelogged={changelogged} />}
-					{isLogged ? <Button className={"signout"} onClick={handleLogOut} style={{ marginLeft: '4%' }}>LogOut</Button> : <Signup changelogged={changelogged} />}
+					{isLogged ? (
+						<span >
+
+							<Button className={"signout"} onClick={handleLogOut} style={{ marginLeft: '4%' }}>LogOut</Button>
+						</span>
+					) : <Signup changelogged={changelogged} getUserFromSignUp={getUserFromSignUp} />}
 				</Navbar.Brand>
 			</Container>
 		</Navbar>
